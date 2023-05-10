@@ -147,6 +147,14 @@
                                             <label for="rememberme">Include <code>5</code> % Member Contributions</label>
                                         </div>
                                         <div class="form-group">
+                                            <asp:CheckBox ID="CheckNassa" readonnly="true" runat="server" />
+                                            <label for="rememberme">Include <code>4.5</code> % Nassa Contributions</label>
+                                        </div>
+                                         <div class="form-group">
+                                            <asp:CheckBox ID="CheckNec" readonnly="true" runat="server" />
+                                            <label for="rememberme">Include <code>2</code> % NEC Contribution</label>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="form-label" for="username">Net Salary</label>
                                             <asp:TextBox ID="txtnetsalary" runat="server" ReadOnly="true" class="form-control"></asp:TextBox>
                                             <div class="invalid-feedback">No, you missed this one.</div>

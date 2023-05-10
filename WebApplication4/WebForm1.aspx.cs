@@ -35,35 +35,55 @@ namespace WebApplication4
                 txtmedicalaid.Text = "0";
             }
 
-            double contributionrate = 0;
+            double membercontributionrate = 0;
+            double nassacontributionrate = 0;
+            double neccontributionrate = 0;
             double MedicalAid = Math.Round(double.Parse(txtmedicalaid.Text), 2);
-            double tax = 0;
+            double payeetax = 0;
+            double BandRate = 0;
             double AidsLevy = 0;
+            double FinalTax = 0;
             double cummulativebalance = 0;
             double GrossSalary = double.Parse(txtgrosssalary.Text);
             double TotalTax = 0;
             double NetSalary = 0;
-            DataSet taxtable = lp.TaxTables(GrossSalary, dropdownCurrency.SelectedItem.Text,DateTime.Now);
-            if (taxtable!=null)
+          
+            //TotalTax = (GrossSalary * tax) - cummulativebalance;
+            //txtTotalTax.Text = TotalTax.ToString();
+            if (CheckIsAidsLevy.Checked)
+            {
+                AidsLevy = .03;
+            }
+            if (CheckContributions.Checked)
+            {
+                membercontributionrate = .05;
+            }
+            if (CheckNassa.Checked)
+            {
+                nassacontributionrate = .045;
+            }
+            if (CheckNec.Checked)
+            {
+                neccontributionrate = .02;
+            }
+            TotalTax = (GrossSalary * AidsLevy) + (GrossSalary * membercontributionrate) + (GrossSalary * nassacontributionrate) + (GrossSalary * neccontributionrate)+ MedicalAid;
+            GrossSalary = GrossSalary - TotalTax;
+            DataSet taxtable = lp.TaxTables(GrossSalary, dropdownCurrency.SelectedItem.Text, DateTime.Now);
+            if (taxtable != null)
             {
                 foreach (DataRow dt in taxtable.Tables[0].Rows)
                 {
                     cummulativebalance = Math.Round(double.Parse(dt["Cumulative"].ToString()), 2);
-                    tax = Math.Round(double.Parse(dt["BandRate"].ToString()) / 100, 2);
+                    BandRate = Math.Round(double.Parse(dt["BandRate"].ToString()) / 100, 2);
                 }
             }
-            TotalTax = (GrossSalary * tax) - cummulativebalance;
-            txtTotalTax.Text = TotalTax.ToString();
-            if (CheckIsAidsLevy.Checked)
-            {
-                AidsLevy = TotalTax * .03;
-            }
-            if (CheckContributions.Checked)
-            {
-                contributionrate = .05;
-            }
-            
-            NetSalary = (GrossSalary - TotalTax) - (GrossSalary * contributionrate) - MedicalAid + AidsLevy;
+            payeetax = (GrossSalary * BandRate) - cummulativebalance;
+            FinalTax = payeetax + TotalTax;
+            txtTotalTax.Text = FinalTax.ToString();
+
+
+
+            NetSalary = (GrossSalary - payeetax);
             txtnetsalary.Text = NetSalary.ToString();
 
         }
