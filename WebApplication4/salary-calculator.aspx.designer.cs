@@ -10,7 +10,7 @@
 namespace WebApplication4 {
     
     
-    public partial class WebForm1 {
+    public partial class salary_calculator {
         
         /// <summary>
         /// drpCurrency control.
@@ -47,6 +47,33 @@ namespace WebApplication4 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtgrosssalary;
+        
+        /// <summary>
+        /// CheckAllowance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckAllowance;
+        
+        /// <summary>
+        /// all control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl all;
+        
+        /// <summary>
+        /// txtAllowance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAllowance;
         
         /// <summary>
         /// chkIsActive control.

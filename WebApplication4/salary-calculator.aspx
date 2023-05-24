@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication4.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="salary-calculator.aspx.cs" Inherits="WebApplication4.salary_calculator" %>
 
 <!DOCTYPE html>
 
@@ -38,7 +38,7 @@
                             <div class="page-logo width-mobile-auto m-0 align-items-center justify-content-center p-0 bg-transparent bg-img-none shadow-0 height-9 border-0">
                                 <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
                                     <img src="~/../assets/img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
-                                    <span class="page-logo-text mr-1">Kahwai Salary Predictor</span>
+                                    <span class="page-logo-text mr-1">Kahwaii</span>
                                 </a>
                             </div>
 
@@ -124,8 +124,18 @@
                                         <div class="form-group">
                                             <label class="form-label" for="username">Gross Salary</label>
                                             <asp:TextBox ID="txtgrosssalary" TextMode="Number" runat="server" class="form-control"></asp:TextBox>
-                                            <div class="invalid-feedback">No, you missed this one.</div>
+                                          
                                             <div class="help-block">Enter your gross salary</div>
+                                        </div>
+                                      
+                                        <div class="form-group">
+                                            <asp:CheckBox ID="CheckAllowance" readonnly="true" runat="server" OnCheckedChanged="CheckAllowance_CheckedChanged" AutoPostBack="true" />
+                                            <label for="rememberme">Include Other Allowances</label>
+                                        </div>
+                                          <div class="form-group" id="all" runat="server" visible="false">
+                                            <label class="form-label" for="username">Allowances</label>
+                                            <asp:TextBox ID="txtAllowance"  runat="server" class="form-control"></asp:TextBox>
+                                         
                                         </div>
                                         <div class="form-group">
                                             <asp:CheckBox ID="chkIsActive" readonnly="true" runat="server" OnCheckedChanged="chkIsActive_CheckedChanged" AutoPostBack="true" />
@@ -134,7 +144,7 @@
 
                                         <div class="form-group" id="ma" runat="server" visible="false">
                                             <label class="form-label" for="username">Contribution Amount</label>
-                                            <asp:TextBox ID="txtmedicalaid" runat="server" TextMode="Number" class="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="txtmedicalaid" runat="server"  class="form-control"></asp:TextBox>
                                             <div class="help-block">Enter contribution amount in USD</div>
 
                                         </div>
@@ -155,15 +165,15 @@
                                             <label for="rememberme">Include <code>2</code> % NEC Contribution</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="username">Net Salary</label>
+                                            <label class="form-label" for="username">Net Salary (<code>estimated</code>)</label>
                                             <asp:TextBox ID="txtnetsalary" runat="server" ReadOnly="true" class="form-control"></asp:TextBox>
-                                            <div class="invalid-feedback">No, you missed this one.</div>
+                                            
 
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="username">Tax Payable (<code>excluding other deductions etc</code>)</label>
+                                            <label class="form-label" for="username">Total Deductions (<code>estimated</code>)</label>
                                             <asp:TextBox ID="txtTotalTax" runat="server" ReadOnly="true" class="form-control"></asp:TextBox>
-                                            <div class="invalid-feedback">No, you missed this one.</div>
+                                          
 
                                         </div>
                                         <div class="row no-gutters">

@@ -9,20 +9,20 @@ using WebApplication4.Classes;
 
 namespace WebApplication4
 {
-    public partial class WebForm1 : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+	public partial class salary_calculator : System.Web.UI.Page
+	{
+		protected void Page_Load(object sender, EventArgs e)
+		{
             Page.MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack)
             {
-                
+
             }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            LookUp lp = new LookUp("con",1);
+            LookUp lp = new LookUp("con", 1);
             if (dropdownCurrency.SelectedItem.Text == "Select Currency")
             {
                 lblError.Text = "Please select currency";
@@ -34,56 +34,70 @@ namespace WebApplication4
             {
                 txtmedicalaid.Text = "0";
             }
+            if (txtAllowance.Text == "")
+            {
+                txtAllowance.Text = "0";
+            }
 
-            double membercontributionrate = 0;
-            double nassacontributionrate = 0;
-            double neccontributionrate = 0;
-            double MedicalAid = Math.Round(double.Parse(txtmedicalaid.Text), 2);
-            double payeetax = 0;
+            double MemberContributionRate = 0;
+            double NassaContributionRate = 0;
+            double NecContributionRate = 0;
+            double PayeeTax = 0;
             double BandRate = 0;
+            double AidsLevyRate = 0;
             double AidsLevy = 0;
             double FinalTax = 0;
-            double cummulativebalance = 0;
+            double CummulativeBalance = 0;
+            double Allowances = double.Parse(txtAllowance.Text);
             double GrossSalary = double.Parse(txtgrosssalary.Text);
             double TotalTax = 0;
             double NetSalary = 0;
-          
-            //TotalTax = (GrossSalary * tax) - cummulativebalance;
-            //txtTotalTax.Text = TotalTax.ToString();
+            double TotalTaxableAmount = 0;
+
             if (CheckIsAidsLevy.Checked)
             {
-                AidsLevy = .03;
+                AidsLevyRate = .03;
             }
             if (CheckContributions.Checked)
             {
-                membercontributionrate = .05;
+                MemberContributionRate = .05;
             }
             if (CheckNassa.Checked)
             {
-                nassacontributionrate = .045;
+                NassaContributionRate = .045;
             }
             if (CheckNec.Checked)
             {
-                neccontributionrate = .02;
+                NecContributionRate = .02;
             }
-            TotalTax = (GrossSalary * AidsLevy) + (GrossSalary * membercontributionrate) + (GrossSalary * nassacontributionrate) + (GrossSalary * neccontributionrate)+ MedicalAid;
+
+            double NassaPension = Math.Round(GrossSalary * NassaContributionRate,2);
+            double PensionFund =Math.Round(GrossSalary * MemberContributionRate,2);
+            double Nec = Math.Round((GrossSalary * NecContributionRate)/2,2);
+            double MedicalAid = Math.Round(double.Parse(txtmedicalaid.Text), 2);
+
+            TotalTax = NassaPension + PensionFund + Nec + MedicalAid;
             GrossSalary = GrossSalary - TotalTax;
-            DataSet taxtable = lp.TaxTables(GrossSalary, dropdownCurrency.SelectedItem.Text, DateTime.Now);
+            TotalTaxableAmount = GrossSalary + Allowances;
+            DataSet taxtable = lp.TaxTables(TotalTaxableAmount, dropdownCurrency.SelectedItem.Text, DateTime.Now);
             if (taxtable != null)
             {
                 foreach (DataRow dt in taxtable.Tables[0].Rows)
                 {
-                    cummulativebalance = Math.Round(double.Parse(dt["Cumulative"].ToString()), 2);
+                    CummulativeBalance = Math.Round(double.Parse(dt["Cumulative"].ToString()), 2);
                     BandRate = Math.Round(double.Parse(dt["BandRate"].ToString()) / 100, 2);
                 }
             }
-            payeetax = (GrossSalary * BandRate) - cummulativebalance;
-            FinalTax = payeetax + TotalTax;
+
+
+            PayeeTax = (TotalTaxableAmount * BandRate) - CummulativeBalance;
+
+            AidsLevy = PayeeTax * AidsLevyRate;
+
+            FinalTax = Math.Round(PayeeTax + TotalTax + AidsLevy,2);
             txtTotalTax.Text = FinalTax.ToString();
 
-
-
-            NetSalary = (GrossSalary - payeetax);
+            NetSalary = Math.Round(TotalTaxableAmount - PayeeTax,2);
             txtnetsalary.Text = NetSalary.ToString();
 
         }
@@ -92,13 +106,19 @@ namespace WebApplication4
         {
             txtgrosssalary.Text = "";
             txtmedicalaid.Text = "";
-            chkIsActive.Checked = false;
-            CheckIsAidsLevy.Checked = false;
-            CheckContributions.Checked = false;
-            ma.Visible = false;
+            txtmedicalaid.Text = "";
             lblError.Text = "";
             txtnetsalary.Text = "";
             txtTotalTax.Text = "";
+            txtAllowance.Text = "";
+            chkIsActive.Checked = false;
+            CheckIsAidsLevy.Checked = false;
+            CheckContributions.Checked = false;
+            CheckAllowance.Checked = false;
+            CheckNassa.Checked = false;
+            ma.Visible = false;
+            all.Visible = false;
+            CheckNec.Checked = false;
 
         }
 
@@ -121,7 +141,7 @@ namespace WebApplication4
             LookUp lp = new LookUp("con", 1);
             DataSet tax = lp.getTax(drpCurrency.SelectedItem.Text);
 
-            if (tax!=null)
+            if (tax != null)
             {
                 grdTax.DataSource = tax;
                 grdTax.DataBind();
@@ -133,5 +153,19 @@ namespace WebApplication4
             }
 
         }
+
+        protected void CheckAllowance_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheckAllowance.Checked)
+            {
+                all.Visible = true;
+            }
+            else
+            {
+                all.Visible = false;
+                txtAllowance.Text = "0";
+            }
+        }
     }
+
 }

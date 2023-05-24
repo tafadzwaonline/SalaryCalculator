@@ -20,7 +20,7 @@ namespace WebApplication4
         void Session_Start(object sender, EventArgs e)
         {
             //Code that runs when a new session is started
-            Response.Redirect("~/WebForm1.aspx");
+            Response.Redirect("~/salary-calculator.aspx");
 
         }
     }
