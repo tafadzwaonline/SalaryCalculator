@@ -48,11 +48,12 @@ namespace WebApplication4
             double AidsLevy = 0;
             double FinalTax = 0;
             double CummulativeBalance = 0;
-            double Allowances = double.Parse(txtAllowance.Text);
-            double GrossSalary = double.Parse(txtgrosssalary.Text);
+            double Allowances = Math.Round(double.Parse(txtAllowance.Text),2);
+            double GrossSalary = Math.Round(double.Parse(txtgrosssalary.Text),2);
             double TotalTax = 0;
             double NetSalary = 0;
             double TotalTaxableAmount = 0;
+            double TotalAdditions = 0;
 
             if (CheckIsAidsLevy.Checked)
             {
@@ -70,7 +71,7 @@ namespace WebApplication4
             {
                 NecContributionRate = .02;
             }
-
+            TotalAdditions = Math.Round(GrossSalary + Allowances,2);
             double NassaPension = Math.Round(GrossSalary * NassaContributionRate,2);
             double PensionFund =Math.Round(GrossSalary * MemberContributionRate,2);
             double Nec = Math.Round((GrossSalary * NecContributionRate)/2,2);
@@ -90,15 +91,28 @@ namespace WebApplication4
             }
 
 
-            PayeeTax = (TotalTaxableAmount * BandRate) - CummulativeBalance;
+            PayeeTax = Math.Round((TotalTaxableAmount * BandRate) - CummulativeBalance,2);
 
-            AidsLevy = PayeeTax * AidsLevyRate;
+            AidsLevy =Math.Round(PayeeTax * AidsLevyRate,2);
 
             FinalTax = Math.Round(PayeeTax + TotalTax + AidsLevy,2);
             txtTotalTax.Text = FinalTax.ToString();
 
             NetSalary = Math.Round(TotalTaxableAmount - PayeeTax,2);
             txtnetsalary.Text = NetSalary.ToString();
+
+
+
+            lblgrosssalary.Text = txtgrosssalary.Text;
+            lblAllowance.Text = txtAllowance.Text;
+            lblPaye.Text = PayeeTax.ToString();
+            lblMedicalAid.Text = MedicalAid.ToString();
+            lblNec.Text = Nec.ToString();
+            lblNassa.Text = NassaPension.ToString();
+            lblAidsLevy.Text = AidsLevy.ToString();
+            lblPension.Text = PensionFund.ToString();
+            lblTotalGross.Text = TotalAdditions.ToString();
+            lblTotalDeductions.Text = txtTotalTax.Text;
 
         }
 
@@ -119,6 +133,16 @@ namespace WebApplication4
             ma.Visible = false;
             all.Visible = false;
             CheckNec.Checked = false;
+            lblgrosssalary.Text = "0";
+            lblAllowance.Text = "0";
+            lblPaye.Text = "0";
+            lblMedicalAid.Text = "0";
+            lblNec.Text = "0";
+            lblNassa.Text = "0";
+            lblAidsLevy.Text = "0";
+            lblPension.Text = "0";
+            lblTotalGross.Text = "0";
+            lblTotalDeductions.Text = "0";
 
         }
 
