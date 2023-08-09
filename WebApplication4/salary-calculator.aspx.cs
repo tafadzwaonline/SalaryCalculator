@@ -28,6 +28,12 @@ namespace WebApplication4
                 lblError.Text = "Please select currency";
                 return;
             }
+            if (txtgrosssalary.Text == "")
+            {
+                lblError.Text = "Please enter basic salary";
+                return;
+            }
+
             lblError.Text = "";
 
             if (txtmedicalaid.Text == "")
@@ -38,6 +44,7 @@ namespace WebApplication4
             {
                 txtAllowance.Text = "0";
             }
+            
 
             double MemberContributionRate = 0;
             double NassaContributionRate = 0;
@@ -78,7 +85,7 @@ namespace WebApplication4
             double MedicalAid = Math.Round(double.Parse(txtmedicalaid.Text), 2);
 
             TotalTax = NassaPension + PensionFund + Nec + MedicalAid;
-            GrossSalary = GrossSalary - TotalTax;
+            GrossSalary = GrossSalary - (NassaPension + PensionFund + Nec);
             TotalTaxableAmount = GrossSalary + Allowances;
             DataSet taxtable = lp.TaxTables(TotalTaxableAmount, dropdownCurrency.SelectedItem.Text, DateTime.Now);
             if (taxtable != null)
@@ -92,13 +99,13 @@ namespace WebApplication4
 
 
             PayeeTax = Math.Round((TotalTaxableAmount * BandRate) - CummulativeBalance,2);
-
+            PayeeTax = Math.Round(PayeeTax - (.5 * MedicalAid),2);
             AidsLevy =Math.Round(PayeeTax * AidsLevyRate,2);
 
             FinalTax = Math.Round(PayeeTax + TotalTax + AidsLevy,2);
             txtTotalTax.Text = FinalTax.ToString();
 
-            NetSalary = Math.Round(TotalTaxableAmount - PayeeTax,2);
+            NetSalary = Math.Round(TotalAdditions - FinalTax, 2);
             txtnetsalary.Text = NetSalary.ToString();
 
 
