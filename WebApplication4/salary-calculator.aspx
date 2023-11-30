@@ -63,8 +63,8 @@
                                                     <b><code>(Additions)</code></b>
                                                     <br />
                                                     Basic Salary: <code><asp:Label ID="lblgrosssalary" runat="server" Font-Size="Small" Style="font-size: 14px;" Text="0" ></asp:Label></code>
-                                                    <br />
-                                                    Allowances: <code><asp:Label ID="lblAllowance" runat="server" Font-Size="Small" Style="font-size: 14px;" Text="0" ></asp:Label></code>
+                                                   
+                                                   <%-- Allowances: <code><asp:Label ID="lblAllowance" runat="server" Font-Size="Small" Style="font-size: 14px;" Text="0" ></asp:Label></code>--%>
                                                     <br />
                                                     <b>Total Gross:<code><asp:Label ID="lblTotalGross" runat="server" Font-Size="Small" Style="font-size: 14px;" Text="0" ></asp:Label></code></b> 
                                                     <br />
@@ -89,7 +89,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="form-label" for="simpleinput">Currency</label>
+                                                    <%--<label class="form-label" for="simpleinput">Tax Tables (Zimbabwe)</label>--%>
                                                     <asp:DropDownList ID="drpCurrency" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drpCurrency_SelectedIndexChanged">
                                                         <asp:ListItem Text="Select Currency" />
                                                         <asp:ListItem Text="USD" />
@@ -147,21 +147,12 @@
                                             <asp:Label ID="lblError" runat="server" Font-Size="Small" Style="font-size: 14px;" Text="" ForeColor="Red"></asp:Label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="username">Basic Salary</label>
+                                            <label class="form-label" for="username">Gross salary</label>
                                             <asp:TextBox ID="txtgrosssalary" TextMode="Number" runat="server" class="form-control"></asp:TextBox>
 
-                                            <div class="help-block">Enter your gross salary</div>
+                                            
                                         </div>
 
-                                        <div class="form-group">
-                                            <asp:CheckBox ID="CheckAllowance" readonnly="true" runat="server" OnCheckedChanged="CheckAllowance_CheckedChanged" AutoPostBack="true" />
-                                            <label for="rememberme">Include Other Allowances<code>(taxable)</code> </label>
-                                        </div>
-                                        <div class="form-group" id="all" runat="server" visible="false">
-                                            <label class="form-label" for="username">Allowances</label>
-                                            <asp:TextBox ID="txtAllowance" runat="server" class="form-control"></asp:TextBox>
-
-                                        </div>
                                         <div class="form-group">
                                             <asp:CheckBox ID="chkIsActive" readonnly="true" runat="server" OnCheckedChanged="chkIsActive_CheckedChanged" AutoPostBack="true" />
                                             <label for="rememberme">Include Medical AID</label>
@@ -174,15 +165,15 @@
 
                                         </div>
                                         <div class="form-group">
-                                            <asp:CheckBox ID="CheckIsAidsLevy" readonnly="true" runat="server" />
+                                            <asp:CheckBox ID="CheckIsAidsLevy" Checked="true" runat="server" />
                                             <label for="rememberme">Include <code>3</code> % Aids Levy</label>
                                         </div>
                                         <div class="form-group">
                                             <asp:CheckBox ID="CheckContributions" readonnly="true" runat="server" />
-                                            <label for="rememberme">Include <code>5</code> % Member Contributions</label>
+                                            <label for="rememberme">Include <code>5</code> % Member Contributions(pension fund)</label>
                                         </div>
                                         <div class="form-group">
-                                            <asp:CheckBox ID="CheckNassa" readonnly="true" runat="server" />
+                                            <asp:CheckBox ID="CheckNassa"  Checked="true" runat="server" />
                                             <label for="rememberme">Include <code>4.5</code> % Nassa Contributions</label>
                                         </div>
                                         <div class="form-group">
