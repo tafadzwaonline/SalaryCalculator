@@ -50,7 +50,7 @@
                                 <div class="col col-md-6 col-lg-7 hidden-sm-down">
                                     <div id="panel-1" class="panel" style="width: 110%; margin: 0 auto; text-align: left;">
                                         <div class="panel-hdr">
-                                            <h2>Tax Tables <span class="fw-300"><i>(USD & ZWL)</i></span>
+                                            <h2>Tax Tables <span class="fw-300"><i>(USD & ZIG)</i></span>
                                             </h2>
 
                                         </div>
@@ -93,7 +93,7 @@
                                                     <asp:DropDownList ID="drpCurrency" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drpCurrency_SelectedIndexChanged">
                                                         <asp:ListItem Text="Select Currency" />
                                                         <asp:ListItem Text="USD" />
-                                                        <asp:ListItem Text="ZWL" />
+                                                        <asp:ListItem Text="ZIG" />
                                                     </asp:DropDownList>
                                                 </div>
                                                 <table style="width: 100%">
@@ -140,7 +140,7 @@
                                             <asp:DropDownList ID="dropdownCurrency" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drpCurrency_SelectedIndexChanged">
                                                 <asp:ListItem Text="Select Currency" />
                                                 <asp:ListItem Text="USD" />
-                                                <asp:ListItem Text="ZWL" />
+                                                <asp:ListItem Text="ZIG" />
                                             </asp:DropDownList>
                                         </div>
                                          <div class="col-xs-12 text-center">

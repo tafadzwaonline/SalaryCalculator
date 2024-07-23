@@ -151,7 +151,12 @@ namespace WebApplication4
 
         protected void drpCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            if (drpCurrency.SelectedItem.Text == "Select Currency")
+            {
+                lblError.Text = "currency is required";
+                return;
+            }
+            lblError.Text = string.Empty;
             DataSet tax = lp.getTax(drpCurrency.SelectedItem.Text);
 
             if (tax != null)
