@@ -17,33 +17,82 @@ namespace WebApplication4
             Page.MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack)
             {
+                try
+                {
 
+                    if (lp.getCurrency() != null)
+                    {
+                        ListItem li = new ListItem("Select a currency", "0");
+                        drpCurrency.DataSource = lp.getCurrency();
+                        drpCurrency.DataValueField = "CODE";
+                        drpCurrency.DataTextField = "Name";
+                        drpCurrency.DataBind();
+                        drpCurrency.Items.Insert(0, li);
+                    }
+                    else
+                    {
+                        ListItem li = new ListItem("There are no currencies", "0");
+                        drpCurrency.DataSource = null;
+                        drpCurrency.DataBind();
+                        drpCurrency.Items.Insert(0, li);
+                    }
+                    if (lp.getCurrency() != null)
+                    {
+                        ListItem li = new ListItem("Select a currency", "0");
+                        dropdownCurrency.DataSource = lp.getCurrency();
+                        dropdownCurrency.DataValueField = "CODE";
+                        dropdownCurrency.DataTextField = "Name";
+                        dropdownCurrency.DataBind();
+                        dropdownCurrency.Items.Insert(0, li);
+                    }
+                    else
+                    {
+                        ListItem li = new ListItem("There are no currencies", "0");
+                        dropdownCurrency.DataSource = null;
+                        dropdownCurrency.DataBind();
+                        dropdownCurrency.Items.Insert(0, li);
+                    }
+                   
+                }
+                catch (Exception ex)
+                {
+                   
+                }
             }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             
-            if (dropdownCurrency.SelectedItem.Text == "Select Currency")
+            if (dropdownCurrency.SelectedValue == "0")
             {
                 lblError.Text = "Please select currency";
                 return;
             }
-            if (txtgrosssalary.Text == "")
+            if (string.IsNullOrWhiteSpace(txtgrosssalary.Text))
             {
                 lblError.Text = "Please enter basic salary";
                 return;
             }
 
-            lblError.Text = string.Empty;
+            
 
-            if (txtmedicalaid.Text == "")
+            if (string.IsNullOrWhiteSpace(txtmedicalaid.Text))
             {
                 txtmedicalaid.Text = "0";
             }
 
-            
+            double NassaLimit = 0;
+            if (dropdownCurrency.SelectedValue == "USD")
+            {
+                NassaLimit = 31.5;
+            }
+            else
+            {
+                NassaLimit = (31.5 * 13.7859);
+            }
 
+           
             double MemberContributionRate = 0;
             double NassaContributionRate = 0;
             double NecContributionRate = 0;
@@ -69,6 +118,12 @@ namespace WebApplication4
             }
             double TotalAdditions = Math.Round(GrossSalary, 2);
             double NassaPension = Math.Round(GrossSalary * NassaContributionRate,2);
+
+            if (NassaPension > NassaLimit)
+            {
+                NassaPension = NassaLimit;
+            }
+
             double PensionFund =Math.Round(GrossSalary * MemberContributionRate,2);
             double Nec = Math.Round((GrossSalary * NecContributionRate)/2,2);
             double MedicalAid = Math.Round(double.Parse(txtmedicalaid.Text), 2);
@@ -76,7 +131,7 @@ namespace WebApplication4
             double TotalTax = NassaPension + PensionFund + Nec + MedicalAid;
             GrossSalary -= (NassaPension + PensionFund + Nec);
             double TotalTaxableAmount = GrossSalary;
-            DataSet taxtable = lp.TaxTables(TotalTaxableAmount, dropdownCurrency.SelectedItem.Text, DateTime.Now);
+            DataSet taxtable = lp.TaxTables(TotalTaxableAmount, dropdownCurrency.SelectedValue, DateTime.Now);
             if (taxtable != null)
             {
                 foreach (DataRow dt in taxtable.Tables[0].Rows)
@@ -108,7 +163,7 @@ namespace WebApplication4
             lblPension.Text = PensionFund.ToString();
             lblTotalGross.Text = TotalAdditions.ToString();
             lblTotalDeductions.Text = txtTotalTax.Text;
-
+            lblError.Text = string.Empty;
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
@@ -121,6 +176,7 @@ namespace WebApplication4
             txtnetsalary.Text = string.Empty;
             txtTotalTax.Text = string.Empty;
             CheckContributions.Checked = false;
+            chkIsActive.Checked = false;
             ma.Visible = false;
             CheckNec.Checked = false;
             lblgrosssalary.Text = "0";
@@ -132,6 +188,8 @@ namespace WebApplication4
             lblPension.Text = "0";
             lblTotalGross.Text = "0";
             lblTotalDeductions.Text = "0";
+            drpCurrency.SelectedValue = "0";
+            dropdownCurrency.SelectedValue = "0";
 
         }
 
@@ -151,13 +209,17 @@ namespace WebApplication4
 
         protected void drpCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (drpCurrency.SelectedItem.Text == "Select Currency")
+            DataSet tax = lp.getTax(drpCurrency.SelectedValue);
+            if (drpCurrency.SelectedValue == "0")
             {
-                lblError.Text = "currency is required";
+                lblError2.Text = "currency is required";
+                grdTax.DataSource = null;
+                grdTax.DataBind();
                 return;
             }
-            lblError.Text = string.Empty;
-            DataSet tax = lp.getTax(drpCurrency.SelectedItem.Text);
+
+            lblError2.Text = string.Empty;
+            
 
             if (tax != null)
             {

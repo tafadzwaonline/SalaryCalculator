@@ -91,10 +91,11 @@
                                                 <div class="form-group">
                                                     <%--<label class="form-label" for="simpleinput">Tax Tables (Zimbabwe)</label>--%>
                                                     <asp:DropDownList ID="drpCurrency" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drpCurrency_SelectedIndexChanged">
-                                                        <asp:ListItem Text="Select Currency" />
-                                                        <asp:ListItem Text="USD" />
-                                                        <asp:ListItem Text="ZIG" />
+                                             
                                                     </asp:DropDownList>
+                                                     <div class="col-xs-12 text-center">
+    <asp:Label ID="lblError2" runat="server" Font-Size="Small" Style="font-size: 14px;" Text="" ForeColor="Red"></asp:Label>
+</div>
                                                 </div>
                                                 <table style="width: 100%">
                                                     <tr>
@@ -137,10 +138,8 @@
 
                                         <div class="form-group">
                                             <label class="form-label" for="simpleinput">Currency</label>
-                                            <asp:DropDownList ID="dropdownCurrency" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drpCurrency_SelectedIndexChanged">
-                                                <asp:ListItem Text="Select Currency" />
-                                                <asp:ListItem Text="USD" />
-                                                <asp:ListItem Text="ZIG" />
+                                            <asp:DropDownList ID="dropdownCurrency" runat="server" CssClass="form-control" AutoPostBack="false">
+                                          
                                             </asp:DropDownList>
                                         </div>
                                          <div class="col-xs-12 text-center">

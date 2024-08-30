@@ -49,6 +49,11 @@ namespace WebApplication4.Classes
             string str = "SELECT ID,CONVERT(char(10), EffectiveDate,126)EffectiveDate,BandStart,BandEnd,BandRate,Cumulative,Currency FROM TaxTables where Currency = '"+ Currency + "' and EffectiveDate=(Select Max(EffectiveDate) from TaxTables where Currency = '"+ Currency +"') order by EffectiveDate Desc";
             return ReturnDs(str);
         }
+        public DataSet getCurrency()
+        {
+            string str = "SELECT * from Currency";
+            return ReturnDs(str);
+        }
         public DataSet TaxTables(double CumSalary, string Currency, DateTime PayDate)
         {
             try
