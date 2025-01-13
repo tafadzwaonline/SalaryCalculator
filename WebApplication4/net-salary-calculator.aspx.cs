@@ -245,7 +245,10 @@ namespace WebApplication4
 
         }
 
-
+        protected void btnGross_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("~/gross-salary-calculator"));
+        }
     }
 
 }

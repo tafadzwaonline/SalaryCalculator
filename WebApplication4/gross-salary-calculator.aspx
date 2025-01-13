@@ -9,16 +9,22 @@
                                     <span class="page-logo-text mr-1">Salari</span>
                                 </a>
                             </div>
-
+                                             <asp:Button ID="lblGrossLabel" runat="server" Text="Gross Salary Calculator" 
+class="btn btn-block btn-lg" 
+style="background-color: #55497C; color: white; border: none;" />
                         </div>
                     </div>
+                          
                     <div class="flex-1" style="background: url(~/../assets/img/svg/pattern-1.svg) no-repeat center bottom fixed; background-size: cover;">
                         <div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0">
                             <div class="row">
                                 <div class="col col-md-6 col-lg-7 hidden-sm-down">
                                     <div id="panel-1" class="panel" style="width: 110%; margin: 0 auto; text-align: left;">
                                         <div class="panel-hdr">
-                                            <h2>Tax Tables <span class="fw-300"><i>(USD & ZIG)</i></span>
+                                            <h2>Tax Tables <span class="fw-300"><i>(USD & ZIG) </i>
+
+                                                           </span>&nbsp&nbsp
+                                                <asp:Button ID="btnNetSalary" runat="server" Text="Determine Net Salary" class="btn btn-success btn-block btn-lg" style="width: 200px;" OnClick="btnNetSalary_Click"  />
                                             </h2>
 
                                         </div>

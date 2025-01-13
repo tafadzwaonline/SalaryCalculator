@@ -10,18 +10,27 @@
                                     <span class="page-logo-text mr-1">Salari</span>
                                 </a>
                             </div>
-
+                                             <asp:Button ID="lblNetSalary" runat="server" Text="Net Salary Calculator" 
+class="btn btn-block btn-lg" 
+style="background-color: #55497C; color: white; border: none;" />
                         </div>
                     </div>
-                    <div class="flex-1" style="background: url(~/../assets/img/svg/pattern-1.svg) no-repeat center bottom fixed; background-size: cover;">
+                           
+                  
+                             
+                     
+
                         <div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0">
+                             
                             <div class="row">
                                 <div class="col col-md-6 col-lg-7 hidden-sm-down">
                                     <div id="panel-1" class="panel" style="width: 110%; margin: 0 auto; text-align: left;">
                                         <div class="panel-hdr">
-                                            <h2>Tax Tables <span class="fw-300"><i>(USD & ZIG)</i></span>
-                                            </h2>
+                                                            <h2>Tax Tables <span class="fw-300"><i>(USD & ZIG) </i>
 
+                               </span>&nbsp&nbsp
+                    <asp:Button ID="btnGross" runat="server" Text="Determine Gross Salary" class="btn btn-success btn-block btn-lg" style="width: 200px;" OnClick="btnGross_Click"  />
+                </h2>
                                         </div>
                                         <div class="panel-container show">
                                             <div class="panel-content">
@@ -129,7 +138,7 @@
                                         <div class="form-group" id="ma" runat="server" visible="false">
                                             <label class="form-label" for="username">Contribution Amount</label>
                                             <asp:TextBox ID="txtmedicalaid" runat="server" class="form-control"></asp:TextBox>
-                                            <div class="help-block">Enter contribution amount in USD</div>
+                                            <%--<div class="help-block">Enter contribution amount in USD</div>--%>
 
                                         </div>
                                         <div class="form-group">
@@ -177,7 +186,7 @@
                             </div>
 
                         </div>
-                    </div>
+                  
                   
               
 </asp:Content>

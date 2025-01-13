@@ -154,43 +154,20 @@ namespace WebApplication4
         protected void btnClear_Click(object sender, EventArgs e)
         {
             txtgrosssalary.Text = string.Empty;
-            //txtmedicalaid.Text = string.Empty;
             lblError.Text = string.Empty;
             lblNetCode.Text= string.Empty;
             lblGrossCode.Text=string.Empty;
             txtnetsalary.Text = string.Empty;
-            //txtTotalTax.Text = string.Empty;
             CheckContributions.Checked = false;
-            //chkIsActive.Checked = false;
-            //ma.Visible = false;
             CheckNec.Checked = false;
             lblEstimatedGross.Text = "0";
-            //lblPaye.Text = "0";
-            //lblMedicalAid.Text = "0";
-            //lblNec.Text = "0";
-            //lblNassa.Text = "0";
-            //lblAidsLevy.Text = "0";
-            //lblPension.Text = "0";
             lblNetsalary.Text = "0";
-           // lblTotalDeductions.Text = "0";
             drpCurrency.SelectedValue = "0";
             dropdownCurrency.SelectedValue = "0";
 
         }
 
-        //protected void chkIsActive_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (chkIsActive.Checked)
-        //    {
-
-        //        ma.Visible = true;
-        //    }
-        //    else
-        //    {
-        //        ma.Visible = false;
-        //        txtmedicalaid.Text = string.Empty;
-        //    }
-        //}
+       
 
         protected void drpCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -219,7 +196,10 @@ namespace WebApplication4
 
         }
 
-
+        protected void btnNetSalary_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("~/net-salary-calculator"));
+        }
     }
 
 }

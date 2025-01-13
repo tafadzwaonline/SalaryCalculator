@@ -43,7 +43,7 @@
                     <div class="container body-content">
                         <hr />
                         <footer style="text-align: center;">
-                            <p>&copy; <%: DateTime.Now.Year %> <a href="https://www.linkedin.com/in/tafadzwa-kahwai-b75044177/"><b><span style="color: black;">Developed by Tafadzwa Kahwai</span></b></a></p>
+                            <p>&copy; <%: DateTime.Now.Year %> <a href="https://www.linkedin.com/in/tafadzwakahwai/"><b><span style="color: black;">Developed by Tafadzwa Kahwai</span></b></a></p>
                         </footer>
                     </div>
                 </form>

@@ -13,5 +13,15 @@ namespace WebApplication4.Master
         {
 
         }
+
+        protected void btnGrossSalary_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("~/gross-salary-calculator"));
+        }
+
+        protected void btnNetSalary_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("~/net-salary-calculator"));
+        }
     }
 }
