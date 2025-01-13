@@ -388,6 +388,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="contribution-rate.aspx" />
+    <Content Include="dashboard.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="exchange-rate.aspx" />
     <Content Include="favicon.ico" />
@@ -477,6 +478,13 @@
     </Compile>
     <Compile Include="contribution-rate.aspx.designer.cs">
       <DependentUpon>contribution-rate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dashboard.aspx.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dashboard.aspx.designer.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

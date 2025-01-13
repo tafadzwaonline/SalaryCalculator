@@ -63,10 +63,22 @@ namespace WebApplication4
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-
+            double gSalary;
             if (string.IsNullOrWhiteSpace(txtnetsalary.Text))
             {
                 lblError.Text = "Please enter net salary";
+                return;
+            }
+
+            if (!double.TryParse(txtnetsalary.Text, out gSalary))
+            {
+                lblError.Text = "net salary must be a valid number.";
+                return;
+            }
+
+            if (double.Parse(txtnetsalary.Text) <= 0)
+            {
+                lblError.Text = "net salary cannot be less or equal to zero";
                 return;
             }
 
@@ -77,13 +89,21 @@ namespace WebApplication4
             double NecContributionRate = CheckNec.Checked ? 0.02 : 0;
             double AidsLevyRate = CheckIsAidsLevy.Checked ? 0.03 : 0;
 
-            // Estimate Gross Salary
-            double EstimatedGrossSalary = NetSalary;
+            //// Validate Medical Aid input
+            //if (string.IsNullOrWhiteSpace(txtmedicalaid.Text))
+            //{
+            //    txtmedicalaid.Text = "0";
+            //}
+            //double MedicalAid = chkIsActive.Checked ?  Math.Round(Convert.ToDouble(txtmedicalaid.Text), 2) : 0;
+
+            double low = NetSalary; // Minimum possible gross salary
+            double high = NetSalary * 2; // Arbitrarily set an upper limit
+            double EstimatedGrossSalary = 0;
             double TotalDeductions = 0, FinalTax = 0;
 
-            do
+            while (high - low > 0.01) // Precision up to 0.01
             {
-                EstimatedGrossSalary += 0.01; // Increment gross salary
+                EstimatedGrossSalary = (low + high) / 2; // Midpoint of the range
                 double NassaPension = Math.Min(Math.Round(EstimatedGrossSalary * NassaContributionRate, 2), NassaLimit);
                 double PensionFund = Math.Round(EstimatedGrossSalary * MemberContributionRate, 2);
                 double Nec = Math.Round((EstimatedGrossSalary * NecContributionRate) / 2, 2);
@@ -104,57 +124,73 @@ namespace WebApplication4
                 double PayeeTax = Math.Round(TotalTaxableAmount * BandRate - CummulativeBalance, 2);
                 double AidsLevy = Math.Round(PayeeTax * AidsLevyRate, 2);
 
-                FinalTax = Math.Round(PayeeTax + TotalDeductions + AidsLevy, 2);
+                FinalTax = Math.Round(PayeeTax + AidsLevy, 2); // Removed TotalDeductions here
+                double calculatedNetSalary = Math.Round(EstimatedGrossSalary - (FinalTax + TotalDeductions), 2);
+             
+                // Adjust the search range based on the calculated net salary
+                if (calculatedNetSalary < NetSalary)
+                {
+                    low = EstimatedGrossSalary; // Increase the lower bound
+                }
+                else
+                {
+                    high = EstimatedGrossSalary; // Decrease the upper bound
+                }
             }
-            while (Math.Round(EstimatedGrossSalary - FinalTax, 2) < NetSalary);
+           
+            // Final estimated gross salary
+            EstimatedGrossSalary = Math.Round(EstimatedGrossSalary, 2);
 
             // Display results
-            txtgrosssalary.Text = EstimatedGrossSalary.ToString("F2");
-            txtTotalTax.Text = FinalTax.ToString("F2");
+            txtgrosssalary.Text = Math.Round(EstimatedGrossSalary, 0, MidpointRounding.AwayFromZero).ToString();
+            lblEstimatedGross.Text = txtgrosssalary.Text;
+            lblNetsalary.Text = txtnetsalary.Text;
             lblError.Text = string.Empty;
 
+            lblGrossCode.Text = dropdownCurrency.SelectedValue;
+            lblNetCode.Text = lblGrossCode.Text;
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
             txtgrosssalary.Text = string.Empty;
-            txtmedicalaid.Text = string.Empty;
-            txtmedicalaid.Text = string.Empty;
+            //txtmedicalaid.Text = string.Empty;
             lblError.Text = string.Empty;
-
+            lblNetCode.Text= string.Empty;
+            lblGrossCode.Text=string.Empty;
             txtnetsalary.Text = string.Empty;
-            txtTotalTax.Text = string.Empty;
+            //txtTotalTax.Text = string.Empty;
             CheckContributions.Checked = false;
-            chkIsActive.Checked = false;
-            ma.Visible = false;
+            //chkIsActive.Checked = false;
+            //ma.Visible = false;
             CheckNec.Checked = false;
-            lblgrosssalary.Text = "0";
-            lblPaye.Text = "0";
-            lblMedicalAid.Text = "0";
-            lblNec.Text = "0";
-            lblNassa.Text = "0";
-            lblAidsLevy.Text = "0";
-            lblPension.Text = "0";
-            lblTotalGross.Text = "0";
-            lblTotalDeductions.Text = "0";
+            lblEstimatedGross.Text = "0";
+            //lblPaye.Text = "0";
+            //lblMedicalAid.Text = "0";
+            //lblNec.Text = "0";
+            //lblNassa.Text = "0";
+            //lblAidsLevy.Text = "0";
+            //lblPension.Text = "0";
+            lblNetsalary.Text = "0";
+           // lblTotalDeductions.Text = "0";
             drpCurrency.SelectedValue = "0";
             dropdownCurrency.SelectedValue = "0";
 
         }
 
-        protected void chkIsActive_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkIsActive.Checked)
-            {
+        //protected void chkIsActive_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (chkIsActive.Checked)
+        //    {
 
-                ma.Visible = true;
-            }
-            else
-            {
-                ma.Visible = false;
-                txtmedicalaid.Text = string.Empty;
-            }
-        }
+        //        ma.Visible = true;
+        //    }
+        //    else
+        //    {
+        //        ma.Visible = false;
+        //        txtmedicalaid.Text = string.Empty;
+        //    }
+        //}
 
         protected void drpCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {

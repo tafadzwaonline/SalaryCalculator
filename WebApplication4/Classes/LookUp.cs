@@ -54,6 +54,8 @@ namespace WebApplication4.Classes
             string str = "SELECT * from Currency";
             return ReturnDs(str);
         }
+    
+     
         public DataSet TaxTables(double CumSalary, string Currency, DateTime PayDate)
         {
             try

@@ -15,85 +15,40 @@ namespace WebApplication4
     {
 
         /// <summary>
-        /// lblgrosssalary control.
+        /// lblNetCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblgrosssalary;
+        protected global::System.Web.UI.WebControls.Label lblNetCode;
 
         /// <summary>
-        /// lblTotalGross control.
+        /// lblNetsalary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalGross;
+        protected global::System.Web.UI.WebControls.Label lblNetsalary;
 
         /// <summary>
-        /// lblPaye control.
+        /// lblGrossCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPaye;
+        protected global::System.Web.UI.WebControls.Label lblGrossCode;
 
         /// <summary>
-        /// lblNassa control.
+        /// lblEstimatedGross control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNassa;
-
-        /// <summary>
-        /// lblAidsLevy control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAidsLevy;
-
-        /// <summary>
-        /// lblPension control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPension;
-
-        /// <summary>
-        /// lblNec control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNec;
-
-        /// <summary>
-        /// lblMedicalAid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMedicalAid;
-
-        /// <summary>
-        /// lblTotalDeductions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalDeductions;
+        protected global::System.Web.UI.WebControls.Label lblEstimatedGross;
 
         /// <summary>
         /// drpCurrency control.
@@ -150,33 +105,6 @@ namespace WebApplication4
         protected global::System.Web.UI.WebControls.TextBox txtnetsalary;
 
         /// <summary>
-        /// chkIsActive control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsActive;
-
-        /// <summary>
-        /// ma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ma;
-
-        /// <summary>
-        /// txtmedicalaid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtmedicalaid;
-
-        /// <summary>
         /// CheckIsAidsLevy control.
         /// </summary>
         /// <remarks>
@@ -220,15 +148,6 @@ namespace WebApplication4
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtgrosssalary;
-
-        /// <summary>
-        /// txtTotalTax control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTotalTax;
 
         /// <summary>
         /// btnSubmit control.
