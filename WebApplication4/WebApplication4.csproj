@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="aids-levy.aspx" />
     <Content Include="assets\css\app.bundle.css" />
     <Content Include="assets\css\datagrid\datatables\datatables.bundle.css" />
     <Content Include="assets\css\fa-brands.css" />
@@ -386,7 +387,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="contribution-rate.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="exchange-rate.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -398,7 +401,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="gross-salary-calculator.aspx" />
+    <Content Include="nassa-limit.aspx" />
+    <Content Include="nec-rate.aspx" />
+    <Content Include="net-salary-calculator.aspx" />
     <Content Include="salary-calculator.aspx" />
+    <Content Include="Master\Dashboard.Master" />
+    <Content Include="Master\Main.Master" />
     <None Include="Properties\PublishProfiles\tafadzwaonline97-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\tafadzwaonline97-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -431,12 +440,20 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="tax-tables.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aids-levy.aspx.cs">
+      <DependentUpon>aids-levy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="aids-levy.aspx.designer.cs">
+      <DependentUpon>aids-levy.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -454,6 +471,13 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="contribution-rate.aspx.cs">
+      <DependentUpon>contribution-rate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="contribution-rate.aspx.designer.cs">
+      <DependentUpon>contribution-rate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -461,8 +485,57 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="exchange-rate.aspx.cs">
+      <DependentUpon>exchange-rate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="exchange-rate.aspx.designer.cs">
+      <DependentUpon>exchange-rate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="gross-salary-calculator.aspx.cs">
+      <DependentUpon>gross-salary-calculator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gross-salary-calculator.aspx.designer.cs">
+      <DependentUpon>gross-salary-calculator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Dashboard.Master.cs">
+      <DependentUpon>Dashboard.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Dashboard.Master.designer.cs">
+      <DependentUpon>Dashboard.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="nassa-limit.aspx.cs">
+      <DependentUpon>nassa-limit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nassa-limit.aspx.designer.cs">
+      <DependentUpon>nassa-limit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="nec-rate.aspx.cs">
+      <DependentUpon>nec-rate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nec-rate.aspx.designer.cs">
+      <DependentUpon>nec-rate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="net-salary-calculator.aspx.cs">
+      <DependentUpon>net-salary-calculator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="net-salary-calculator.aspx.designer.cs">
+      <DependentUpon>net-salary-calculator.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="salary-calculator.aspx.cs">
@@ -485,6 +558,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="tax-tables.aspx.cs">
+      <DependentUpon>tax-tables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tax-tables.aspx.designer.cs">
+      <DependentUpon>tax-tables.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

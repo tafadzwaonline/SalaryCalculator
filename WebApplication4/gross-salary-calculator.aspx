@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="salary-calculator.aspx.cs" Inherits="WebApplication4.salary_calculator" %>
-
+﻿<%@ Page Title="" Language="C#"  AutoEventWireup="true" CodeBehind="gross-salary-calculator.aspx.cs" Inherits="WebApplication4.gross_salary_calculator" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -147,7 +146,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" for="username">Gross salary</label>
-                                            <asp:TextBox ID="txtgrosssalary" runat="server" class="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="txtnetsalary" runat="server"  class="form-control"></asp:TextBox>
 
                                             
                                         </div>
@@ -181,7 +180,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" for="username">Net Salary (<code>estimated</code>)</label>
-                                            <asp:TextBox ID="txtnetsalary" runat="server" ReadOnly="true" class="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="txtgrosssalary" runat="server" ReadOnly="true" class="form-control"></asp:TextBox>
 
 
                                         </div>

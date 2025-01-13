@@ -9,11 +9,11 @@ using WebApplication4.Classes;
 
 namespace WebApplication4
 {
-	public partial class salary_calculator : System.Web.UI.Page
-	{
+    public partial class gross_salary_calculator : System.Web.UI.Page
+    {
         readonly LookUp lp = new LookUp("con", 1);
         protected void Page_Load(object sender, EventArgs e)
-		{
+        {
             Page.MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack)
             {
@@ -52,129 +52,67 @@ namespace WebApplication4
                         dropdownCurrency.DataBind();
                         dropdownCurrency.Items.Insert(0, li);
                     }
-                   
+
                 }
                 catch (Exception ex)
                 {
-                   
+
                 }
             }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            double gSalary;
-           
-            if (dropdownCurrency.SelectedValue == "0")
+
+            if (string.IsNullOrWhiteSpace(txtnetsalary.Text))
             {
-                lblError.Text = "Please select currency";
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(txtgrosssalary.Text))
-            {
-                lblError.Text = "Please enter basic salary";
+                lblError.Text = "Please enter net salary";
                 return;
             }
 
-            if (!double.TryParse(txtgrosssalary.Text, out gSalary))
-            {
-                lblError.Text = "gross salary must be a valid number.";
-                return;
-            }
+            double NetSalary = Math.Round(double.Parse(txtnetsalary.Text), 2);
+            double NassaLimit = (dropdownCurrency.SelectedValue == "USD") ? 31.5 : (31.5 * 26.0579);
+            double MemberContributionRate = CheckContributions.Checked ? 0.05 : 0;
+            double NassaContributionRate = CheckNassa.Checked ? 0.045 : 0;
+            double NecContributionRate = CheckNec.Checked ? 0.02 : 0;
+            double AidsLevyRate = CheckIsAidsLevy.Checked ? 0.03 : 0;
 
-            if(double.Parse(txtgrosssalary.Text) <= 0)
-            {
-                lblError.Text = "basic salary cannot be less or equal to zero";
-                return;
-            }
+            // Estimate Gross Salary
+            double EstimatedGrossSalary = NetSalary;
+            double TotalDeductions = 0, FinalTax = 0;
 
-            if (string.IsNullOrWhiteSpace(txtmedicalaid.Text))
+            do
             {
-                txtmedicalaid.Text = "0";
-            }
+                EstimatedGrossSalary += 0.01; // Increment gross salary
+                double NassaPension = Math.Min(Math.Round(EstimatedGrossSalary * NassaContributionRate, 2), NassaLimit);
+                double PensionFund = Math.Round(EstimatedGrossSalary * MemberContributionRate, 2);
+                double Nec = Math.Round((EstimatedGrossSalary * NecContributionRate) / 2, 2);
 
-            double NassaLimit;
-            if (dropdownCurrency.SelectedValue == "USD")
-            {
-                NassaLimit = 31.5;
-            }
-            else
-            {
-                NassaLimit = (31.5 * 26.0579);
-            }
+                TotalDeductions = NassaPension + PensionFund + Nec;
+                double TotalTaxableAmount = EstimatedGrossSalary - TotalDeductions;
 
-           
-            double MemberContributionRate = 0;
-            double NassaContributionRate = 0;
-            double NecContributionRate = 0;
-            double BandRate = 0;
-            double AidsLevyRate = 0;
-            double CummulativeBalance = 0;
-            double GrossSalary = Math.Round(double.Parse(txtgrosssalary.Text),2);
-            if (CheckIsAidsLevy.Checked)
-            {
-                AidsLevyRate = .03;
-            }
-            if (CheckContributions.Checked)
-            {
-                MemberContributionRate = .05;
-            }
-            if (CheckNassa.Checked)
-            {
-                NassaContributionRate = .045;
-            }
-            if (CheckNec.Checked)
-            {
-                NecContributionRate = .02;
-            }
-            double TotalAdditions = Math.Round(GrossSalary, 2);
-            double NassaPension = Math.Round(GrossSalary * NassaContributionRate,2);
-
-            if (NassaPension > NassaLimit)
-            {
-                NassaPension = NassaLimit;
-            }
-
-            double PensionFund =Math.Round(GrossSalary * MemberContributionRate,2);
-            double Nec = Math.Round((GrossSalary * NecContributionRate)/2,2);
-            double MedicalAid = Math.Round(double.Parse(txtmedicalaid.Text), 2);
-
-            double TotalTax = NassaPension + PensionFund + Nec + MedicalAid;
-            GrossSalary -= (NassaPension + PensionFund + Nec);
-            double TotalTaxableAmount = GrossSalary;
-            DataSet taxtable = lp.TaxTables(TotalTaxableAmount, dropdownCurrency.SelectedValue, DateTime.Now);
-            if (taxtable != null)
-            {
-                foreach (DataRow dt in taxtable.Tables[0].Rows)
+                // Fetch tax data from the database
+                double CummulativeBalance = 0, BandRate = 0;
+                DataSet taxtable = lp.TaxTables(TotalTaxableAmount, dropdownCurrency.SelectedValue, DateTime.Now);
+                if (taxtable != null)
                 {
+                    DataRow dt = taxtable.Tables[0].Rows[0];
                     CummulativeBalance = Math.Round(double.Parse(dt["Cumulative"].ToString()), 2);
                     BandRate = Math.Round(double.Parse(dt["BandRate"].ToString()) / 100, 2);
                 }
+
+                double PayeeTax = Math.Round(TotalTaxableAmount * BandRate - CummulativeBalance, 2);
+                double AidsLevy = Math.Round(PayeeTax * AidsLevyRate, 2);
+
+                FinalTax = Math.Round(PayeeTax + TotalDeductions + AidsLevy, 2);
             }
+            while (Math.Round(EstimatedGrossSalary - FinalTax, 2) < NetSalary);
 
-
-            double PayeeTax = Math.Round(TotalTaxableAmount * BandRate - CummulativeBalance, 2);
-            PayeeTax = Math.Round(PayeeTax - (.5 * MedicalAid),2);
-            double AidsLevy = Math.Round(PayeeTax * AidsLevyRate, 2);
-
-            double FinalTax = Math.Round(PayeeTax + TotalTax + AidsLevy, 2);
-            txtTotalTax.Text = FinalTax.ToString();
-
-            double NetSalary = Math.Round(TotalAdditions - FinalTax, 2);
-            txtnetsalary.Text = NetSalary.ToString();
-
-
-
-            lblgrosssalary.Text = txtgrosssalary.Text;
-            lblPaye.Text = PayeeTax.ToString();
-            lblMedicalAid.Text = MedicalAid.ToString();
-            lblNec.Text = Nec.ToString();
-            lblNassa.Text = NassaPension.ToString();
-            lblAidsLevy.Text = AidsLevy.ToString();
-            lblPension.Text = PensionFund.ToString();
-            lblTotalGross.Text = TotalAdditions.ToString();
-            lblTotalDeductions.Text = txtTotalTax.Text;
+            // Display results
+            txtgrosssalary.Text = EstimatedGrossSalary.ToString("F2");
+            txtTotalTax.Text = FinalTax.ToString("F2");
             lblError.Text = string.Empty;
+
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
@@ -230,7 +168,7 @@ namespace WebApplication4
             }
 
             lblError2.Text = string.Empty;
-            
+
 
             if (tax != null)
             {
@@ -245,7 +183,7 @@ namespace WebApplication4
 
         }
 
-        
+
     }
 
 }
