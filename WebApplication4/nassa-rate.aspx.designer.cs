@@ -11,7 +11,7 @@ namespace WebApplication4
 {
 
 
-    public partial class nassa_limit
+    public partial class nassa_rate
     {
 
         /// <summary>
@@ -24,13 +24,13 @@ namespace WebApplication4
         protected global::System.Web.UI.WebControls.TextBox txtEffective;
 
         /// <summary>
-        /// txtLimit control.
+        /// txtRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLimit;
+        protected global::System.Web.UI.WebControls.TextBox txtRate;
 
         /// <summary>
         /// btnSubmit control.
@@ -60,12 +60,12 @@ namespace WebApplication4
         protected global::System.Web.UI.WebControls.Label lblSuccess;
 
         /// <summary>
-        /// grdLimit control.
+        /// grdRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdLimit;
+        protected global::System.Web.UI.WebControls.GridView grdRate;
     }
 }

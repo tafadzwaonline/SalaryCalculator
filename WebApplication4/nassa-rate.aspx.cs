@@ -9,7 +9,7 @@ using WebApplication4.Classes;
 
 namespace WebApplication4
 {
-    public partial class exchange_rate : System.Web.UI.Page
+    public partial class nassa_rate : System.Web.UI.Page
     {
         readonly LookUp lp = new LookUp("con", 1);
         protected void Page_Load(object sender, EventArgs e)
@@ -21,7 +21,7 @@ namespace WebApplication4
             }
         }
 
-       
+
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -52,26 +52,25 @@ namespace WebApplication4
 
 
             ///save to database
-            ///
-            lp.SaveRate(Convert.ToDateTime(txtEffective.Text),Convert.ToDouble(txtRate.Text));
+            lp.SaveNassaRate(Convert.ToDateTime(txtEffective.Text), Convert.ToDouble(txtRate.Text));
             getRate();
-            lblSuccess.Text = "Rate successfully saved";
-           Clear();
+            lblSuccess.Text = "rate successfully saved";
+            Clear();
         }
 
 
         private void getRate()
         {
-            DataSet rates = lp.getRate();
-            if (rates != null) 
+            DataSet rates = lp.getNassaRate();
+            if (rates != null)
             {
-                grdRates.DataSource = rates;
-                grdRates.DataBind();
+                grdRate.DataSource = rates;
+                grdRate.DataBind();
             }
             else
             {
-                grdRates.DataSource = null;
-                grdRates.DataBind();
+                grdRate.DataSource = null;
+                grdRate.DataBind();
             }
         }
         private void Clear()

@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="exchange-rate.aspx.cs" Inherits="WebApplication4.exchange_rate" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.Master" AutoEventWireup="true" CodeBehind="nassa-rate.aspx.cs" Inherits="WebApplication4.nassa_rate" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="height-10 w-100 shadow-lg px-4 bg-brand-gradient">
@@ -19,7 +18,7 @@
             <div class="col col-md-12 col-lg-8 hidden-sm-down">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
-                        <h2>Exchange Rate
+                        <h2>Nassa Rate
                                                
                         </h2>
 
@@ -34,7 +33,7 @@
                                         <asp:TextBox ID="txtEffective" TextMode="Date" runat="server" class="form-control" />
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label" for="TextBox2">Rate</label>
+                                        <label class="form-label" for="TextBox2">Limit</label>
                                         <asp:TextBox ID="txtRate" runat="server" class="form-control" />
                                     </div>
                                 </div>
@@ -64,7 +63,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <asp:GridView ID="grdRates" runat="server" class="table table-bordered table-striped"
+                                                <asp:GridView ID="grdRate" runat="server" class="table table-bordered table-striped"
                                                     AutoGenerateColumns="False" Width="100%"
                                                     AllowPaging="True" AllowSorting="True">
                                                     <Columns>

@@ -15,15 +15,6 @@ namespace WebApplication4
     {
 
         /// <summary>
-        /// lblGrossLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button lblGrossLabel;
-
-        /// <summary>
         /// txtEffective control.
         /// </summary>
         /// <remarks>
@@ -51,12 +42,30 @@ namespace WebApplication4
         protected global::System.Web.UI.WebControls.Button btnSubmit;
 
         /// <summary>
-        /// grdTax control.
+        /// lblError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdTax;
+        protected global::System.Web.UI.WebControls.Label lblError;
+
+        /// <summary>
+        /// lblSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSuccess;
+
+        /// <summary>
+        /// grdRates control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdRates;
     }
 }

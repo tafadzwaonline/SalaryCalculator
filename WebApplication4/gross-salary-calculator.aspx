@@ -87,8 +87,8 @@ style="background-color: #55497C; color: white; border: none;" />
 
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 ml-auto">
-                                    <h1 class="text-white fw-300 mb-3 d-sm-block d-md-none">Secure login
-                                    </h1>
+                                  <%--  <h1 class="text-white fw-300 mb-3 d-sm-block d-md-none">Secure login
+                                    </h1>--%>
                                     <div class="card p-4 rounded-plus bg-faded">
 
                                         <div class="form-group">
