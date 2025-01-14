@@ -144,6 +144,23 @@ namespace WebApplication4.Classes
 
             }
         }
+        public void SaveNecRate(DateTime EffectiveDate, double Amount)
+        {
+
+            string constr = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+            SqlConnection sqlCon = null;
+            using (sqlCon = new SqlConnection(constr))
+            {
+                sqlCon.Open();
+                SqlCommand sql_cmnd = new SqlCommand("sp_SaveNecRate", sqlCon);
+                sql_cmnd.CommandType = CommandType.StoredProcedure;
+                sql_cmnd.Parameters.AddWithValue("@EffectiveDate", SqlDbType.Date).Value = EffectiveDate;
+                sql_cmnd.Parameters.AddWithValue("@Amount", SqlDbType.Float).Value = Amount;
+                sql_cmnd.ExecuteNonQuery();
+                sqlCon.Close();
+
+            }
+        }
 
         public void SaveNassaRate(DateTime EffectiveDate, double Amount)
         {
@@ -224,6 +241,32 @@ namespace WebApplication4.Classes
             try
             {
                 string sql = "sp_getNassaRate";
+                System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
+
+
+                DataSet ds = db.ExecuteDataSet(cmd);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                mMsgFlg = ex.Message;
+                return null;
+            }
+        }
+        public DataSet getNecRate()
+        {
+            try
+            {
+                string sql = "sp_getNecRate";
                 System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
 
 

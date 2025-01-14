@@ -407,6 +407,7 @@
     <Content Include="nassa-rate.aspx" />
     <Content Include="nec-rate.aspx" />
     <Content Include="net-salary-calculator.aspx" />
+    <Content Include="pension-rate.aspx" />
     <Content Include="salary-calculator.aspx" />
     <Content Include="Master\Dashboard.Master" />
     <Content Include="Master\Main.Master" />
@@ -552,6 +553,13 @@
     </Compile>
     <Compile Include="net-salary-calculator.aspx.designer.cs">
       <DependentUpon>net-salary-calculator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pension-rate.aspx.cs">
+      <DependentUpon>pension-rate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pension-rate.aspx.designer.cs">
+      <DependentUpon>pension-rate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="salary-calculator.aspx.cs">
