@@ -64,6 +64,11 @@ namespace WebApplication4
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             double gSalary;
+            if (dropdownCurrency.SelectedValue == "0")
+            {
+                lblError.Text = "Please select currency";
+                return;
+            }
             if (string.IsNullOrWhiteSpace(txtnetsalary.Text))
             {
                 lblError.Text = "Please enter net salary";

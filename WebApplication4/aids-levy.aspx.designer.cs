@@ -24,13 +24,13 @@ namespace WebApplication4
         protected global::System.Web.UI.WebControls.TextBox txtEffective;
 
         /// <summary>
-        /// txtRate control.
+        /// txtLevy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRate;
+        protected global::System.Web.UI.WebControls.TextBox txtLevy;
 
         /// <summary>
         /// btnSubmit control.
@@ -60,12 +60,12 @@ namespace WebApplication4
         protected global::System.Web.UI.WebControls.Label lblSuccess;
 
         /// <summary>
-        /// grdRate control.
+        /// grdLevy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdRate;
+        protected global::System.Web.UI.WebControls.GridView grdLevy;
     }
 }

@@ -77,7 +77,32 @@ namespace WebApplication4.Classes
                 return null;
             }
         }
-      
+        public DataSet GetBands(string Currency)
+
+        {
+            try
+            {
+
+                System.Data.Common.DbCommand cmd = db.GetStoredProcCommand("sp_TaxTables");
+                db.AddInParameter(cmd, "@Currency", DbType.String, Currency);
+                DataSet ds = db.ExecuteDataSet(cmd);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                mMsgFlg = ex.Message;
+                return null;
+            }
+        }
+
         public DataSet getCurrency()
         {
             try
@@ -161,6 +186,27 @@ namespace WebApplication4.Classes
 
             }
         }
+        public void SaveTaxTables(string Currency, DateTime EffectiveDate,double BandRate,double StartRate,double EndRate, double Cummulative)
+        {
+
+            string constr = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+            SqlConnection sqlCon = null;
+            using (sqlCon = new SqlConnection(constr))
+            {
+                sqlCon.Open();
+                SqlCommand sql_cmnd = new SqlCommand("sp_SaveTaxTables", sqlCon);
+                sql_cmnd.CommandType = CommandType.StoredProcedure;
+                sql_cmnd.Parameters.AddWithValue("@Currency", SqlDbType.NVarChar).Value = Currency;
+                sql_cmnd.Parameters.AddWithValue("@EffectiveDate", SqlDbType.Date).Value = EffectiveDate;
+                sql_cmnd.Parameters.AddWithValue("@BandRate", SqlDbType.Float).Value = BandRate;
+                sql_cmnd.Parameters.AddWithValue("@StartRate", SqlDbType.Float).Value = StartRate;
+                sql_cmnd.Parameters.AddWithValue("@EndRate", SqlDbType.Float).Value = EndRate;
+                sql_cmnd.Parameters.AddWithValue("@Cummulative", SqlDbType.Float).Value = Cummulative;
+                sql_cmnd.ExecuteNonQuery();
+                sqlCon.Close();
+
+            }
+        }
         public void SavePensionRate(DateTime EffectiveDate, double Amount)
         {
 
@@ -170,6 +216,24 @@ namespace WebApplication4.Classes
             {
                 sqlCon.Open();
                 SqlCommand sql_cmnd = new SqlCommand("sp_SavePensionRate", sqlCon);
+                sql_cmnd.CommandType = CommandType.StoredProcedure;
+                sql_cmnd.Parameters.AddWithValue("@EffectiveDate", SqlDbType.Date).Value = EffectiveDate;
+                sql_cmnd.Parameters.AddWithValue("@Amount", SqlDbType.Float).Value = Amount;
+                sql_cmnd.ExecuteNonQuery();
+                sqlCon.Close();
+
+            }
+        }
+
+        public void SaveAIDSLevy(DateTime EffectiveDate, double Amount)
+        {
+
+            string constr = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+            SqlConnection sqlCon = null;
+            using (sqlCon = new SqlConnection(constr))
+            {
+                sqlCon.Open();
+                SqlCommand sql_cmnd = new SqlCommand("sp_SaveAidsLevy", sqlCon);
                 sql_cmnd.CommandType = CommandType.StoredProcedure;
                 sql_cmnd.Parameters.AddWithValue("@EffectiveDate", SqlDbType.Date).Value = EffectiveDate;
                 sql_cmnd.Parameters.AddWithValue("@Amount", SqlDbType.Float).Value = Amount;
@@ -258,6 +322,32 @@ namespace WebApplication4.Classes
             try
             {
                 string sql = "sp_getNassaRate";
+                System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
+
+
+                DataSet ds = db.ExecuteDataSet(cmd);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                mMsgFlg = ex.Message;
+                return null;
+            }
+        }
+        public DataSet getLevy()
+        {
+            try
+            {
+                string sql = "sp_getAidsLevy";
                 System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
 
 

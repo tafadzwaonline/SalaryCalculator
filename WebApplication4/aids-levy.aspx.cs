@@ -17,7 +17,7 @@ namespace WebApplication4
             MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack)
             {
-                getRate();
+                getLevy();
             }
         }
 
@@ -31,51 +31,48 @@ namespace WebApplication4
                 lblError.Text = "effective date is required";
                 return;
             }
-            if (string.IsNullOrWhiteSpace(txtRate.Text))
+            if (string.IsNullOrWhiteSpace(txtLevy.Text))
             {
                 lblError.Text = "rate is required";
                 return;
             }
 
-            if (!double.TryParse(txtRate.Text, out rate))
+            if (!double.TryParse(txtLevy.Text, out rate))
             {
                 lblError.Text = "rate must be a valid number.";
                 return;
             }
 
-            if (double.Parse(txtRate.Text) <= 0)
+            if (double.Parse(txtLevy.Text) <= 0)
             {
                 lblError.Text = "rate cannot be less or equal to zero";
                 return;
             }
-
-
-
             ///save to database
-            lp.SavePensionRate(Convert.ToDateTime(txtEffective.Text), Convert.ToDouble(txtRate.Text));
-            getRate();
-            lblSuccess.Text = "rate successfully saved";
+            lp.SaveAIDSLevy(Convert.ToDateTime(txtEffective.Text), Convert.ToDouble(txtLevy.Text));
+            getLevy();
+            lblSuccess.Text = "levy successfully saved";
             Clear();
         }
 
 
-        private void getRate()
+        private void getLevy()
         {
-            DataSet rates = lp.getPensionRate();
+            DataSet rates = lp.getLevy();
             if (rates != null)
             {
-                grdRate.DataSource = rates;
-                grdRate.DataBind();
+                grdLevy.DataSource = rates;
+                grdLevy.DataBind();
             }
             else
             {
-                grdRate.DataSource = null;
-                grdRate.DataBind();
+                grdLevy.DataSource = null;
+                grdLevy.DataBind();
             }
         }
         private void Clear()
         {
-            txtRate.Text = string.Empty;
+            txtLevy.Text = string.Empty;
             txtEffective.Text = string.Empty;
             lblError.Text = string.Empty;
         }

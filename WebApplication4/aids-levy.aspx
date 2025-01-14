@@ -18,7 +18,7 @@
             <div class="col col-md-12 col-lg-8 hidden-sm-down">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
-                        <h2>Pension Rate
+                        <h2>AIDS LEVY
                                                
                         </h2>
 
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label" for="txtRate">Rate</label>
-                                        <asp:TextBox ID="txtRate" runat="server" class="form-control" />
+                                        <asp:TextBox ID="txtLevy" runat="server" class="form-control" />
                                     </div>
                                 </div>
 
@@ -63,7 +63,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <asp:GridView ID="grdRate" runat="server" class="table table-bordered table-striped"
+                                                <asp:GridView ID="grdLevy" runat="server" class="table table-bordered table-striped"
                                                     AutoGenerateColumns="False" Width="100%"
                                                     AllowPaging="True" AllowSorting="True">
                                                     <Columns>
