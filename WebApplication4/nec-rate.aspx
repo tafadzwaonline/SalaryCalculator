@@ -18,7 +18,7 @@
             <div class="col col-md-12 col-lg-8 hidden-sm-down">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
-                        <h2>NEC Limit
+                        <h2>NEC Rate
                                                
                         </h2>
 
