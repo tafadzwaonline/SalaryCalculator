@@ -88,18 +88,13 @@ namespace WebApplication4
             }
 
             double NetSalary = Math.Round(double.Parse(txtnetsalary.Text), 2);
-            double NassaLimit = (dropdownCurrency.SelectedValue == "USD") ? 31.5 : (31.5 * 26.0579);
-            double MemberContributionRate = CheckContributions.Checked ? 0.05 : 0;
-            double NassaContributionRate = CheckNassa.Checked ? 0.045 : 0;
-            double NecContributionRate = CheckNec.Checked ? 0.02 : 0;
-            double AidsLevyRate = CheckIsAidsLevy.Checked ? 0.03 : 0;
+            double NassaLimit = (dropdownCurrency.SelectedValue == "USD") ? lp.getNassaL() : (lp.getNassaL() * lp.getExchangeRate());
+            double MemberContributionRate = CheckContributions.Checked ? lp.getPensionR() : 0;
+            double NassaContributionRate = CheckNassa.Checked ? lp.getNassaR() : 0;
+            double NecContributionRate = CheckNec.Checked ? lp.getNecR() : 0;
+            double AidsLevyRate = CheckIsAidsLevy.Checked ? lp.getAidsLevy() : 0;
 
-            //// Validate Medical Aid input
-            //if (string.IsNullOrWhiteSpace(txtmedicalaid.Text))
-            //{
-            //    txtmedicalaid.Text = "0";
-            //}
-            //double MedicalAid = chkIsActive.Checked ?  Math.Round(Convert.ToDouble(txtmedicalaid.Text), 2) : 0;
+          
 
             double low = NetSalary; // Minimum possible gross salary
             double high = NetSalary * 2; // Arbitrarily set an upper limit

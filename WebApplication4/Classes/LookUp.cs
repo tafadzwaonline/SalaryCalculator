@@ -51,6 +51,145 @@ namespace WebApplication4.Classes
         //    string str = "SELECT ID,CONVERT(char(10), EffectiveDate,126)EffectiveDate,BandStart,BandEnd,BandRate,Cumulative,Currency FROM TaxTables where Currency = '"+ Currency + "' and EffectiveDate=(Select Max(EffectiveDate) from TaxTables where Currency = '"+ Currency +"') order by EffectiveDate Desc";
         //    return ReturnDs(str);
         //}
+
+        public double getAidsLevy()
+        {
+            try
+            {
+                string sql = "sp_getAidsLevyByDate";
+                System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
+                //db.AddInParameter(cmd, "@Currency", DbType.String, Currency);
+                DataSet ds = db.ExecuteDataSet(CommandType.Text, sql);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                mMsgFlg = ex.Message;
+                return 0;
+            }
+        }
+        public double getNassaL()
+        {
+            try
+            {
+                string sql = "sp_getNassaLimitByDate";
+                System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
+                //db.AddInParameter(cmd, "@Currency", DbType.String, Currency);
+                DataSet ds = db.ExecuteDataSet(CommandType.Text, sql);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                mMsgFlg = ex.Message;
+                return 0;
+            }
+        }
+        public double getNassaR()
+        {
+            try
+            {
+                string sql = "sp_getNassaRateByDate";
+                System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
+                //db.AddInParameter(cmd, "@Currency", DbType.String, Currency);
+                DataSet ds = db.ExecuteDataSet(CommandType.Text, sql);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                mMsgFlg = ex.Message;
+                return 0;
+            }
+        }
+        public double getExchangeRate()
+        {
+            try
+            {
+                string sql = "sp_getRateByDate";
+                System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
+                //db.AddInParameter(cmd, "@Currency", DbType.String, Currency);
+                DataSet ds = db.ExecuteDataSet(CommandType.Text, sql);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                mMsgFlg = ex.Message;
+                return 0;
+            }
+        }
+        public double getPensionR()
+        {
+            try
+            {
+                string sql = "sp_getPensionRateByDate";
+                System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
+                //db.AddInParameter(cmd, "@Currency", DbType.String, Currency);
+                DataSet ds = db.ExecuteDataSet(CommandType.Text, sql);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                mMsgFlg = ex.Message;
+                return 0;
+            }
+        }
+        public double getNecR()
+        {
+            try
+            {
+                string sql = "sp_getNecRateByDate";
+                System.Data.Common.DbCommand cmd = db.GetStoredProcCommand(sql);
+                //db.AddInParameter(cmd, "@Currency", DbType.String, Currency);
+                DataSet ds = db.ExecuteDataSet(CommandType.Text, sql);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToDouble(ds.Tables[0].Rows[0][0].ToString());
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                mMsgFlg = ex.Message;
+                return 0;
+            }
+        }
         public DataSet getTax(string Currency)
         {
             try

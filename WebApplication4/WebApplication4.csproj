@@ -408,12 +408,12 @@
     <Content Include="nec-rate.aspx" />
     <Content Include="net-salary-calculator.aspx" />
     <Content Include="pension-rate.aspx" />
-    <Content Include="salary-calculator.aspx" />
     <Content Include="Master\Dashboard.Master" />
     <Content Include="Master\Main.Master" />
     <None Include="Properties\PublishProfiles\tafadzwaonline97-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\tafadzwaonline97-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="salary-calculator.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

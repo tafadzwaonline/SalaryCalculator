@@ -93,40 +93,46 @@ namespace WebApplication4
                 txtmedicalaid.Text = "0";
             }
 
-            double NassaLimit;
-            if (dropdownCurrency.SelectedValue == "USD")
-            {
-                NassaLimit = 31.5;
-            }
-            else
-            {
-                NassaLimit = (31.5 * 26.0579);
-            }
+            //double AidsLevyRate = lp.getAidsLevy();
+            //double NassaLimit = lp.getNassaL();
+            //double ExchangeRate = lp.getExchangeRate();
+            //double MemberContributionRate = lp.getPensionR();
+            //double NassaContributionRate = lp.getNassaR();
+            //double NecContributionRate = lp.getNecR();
 
 
-            double MemberContributionRate = 0;
-            double NassaContributionRate = 0;
-            double NecContributionRate = 0;
+            //if (dropdownCurrency.SelectedValue != "USD")
+            //{
+            //    NassaLimit *= ExchangeRate;
+            //}
+          
+
             double BandRate = 0;
-            double AidsLevyRate = 0;
+          
             double CummulativeBalance = 0;
             double GrossSalary = Math.Round(double.Parse(txtgrosssalary.Text), 2);
-            if (CheckIsAidsLevy.Checked)
-            {
-                AidsLevyRate = .03;
-            }
-            if (CheckContributions.Checked)
-            {
-                MemberContributionRate = .05;
-            }
-            if (CheckNassa.Checked)
-            {
-                NassaContributionRate = .045;
-            }
-            if (CheckNec.Checked)
-            {
-                NecContributionRate = .02;
-            }
+
+            double NassaLimit = (dropdownCurrency.SelectedValue == "USD") ? lp.getNassaL() : (lp.getNassaL() * lp.getExchangeRate());
+            double MemberContributionRate = CheckContributions.Checked ? lp.getPensionR() : 0;
+            double NassaContributionRate = CheckNassa.Checked ? lp.getNassaR() : 0;
+            double NecContributionRate = CheckNec.Checked ? lp.getNecR() : 0;
+            double AidsLevyRate = CheckIsAidsLevy.Checked ? lp.getAidsLevy() : 0;
+            //if (!CheckIsAidsLevy.Checked)
+            //{
+            //    AidsLevyRate = 0;
+            //}
+            //if (!CheckContributions.Checked)
+            //{
+            //    MemberContributionRate = 0;
+            //}
+            //if (!CheckNassa.Checked)
+            //{
+            //    NassaContributionRate = 0;
+            //}
+            //if (!CheckNec.Checked)
+            //{
+            //    NecContributionRate = 0;
+            //}
             double TotalAdditions = Math.Round(GrossSalary, 2);
             double NassaPension = Math.Round(GrossSalary * NassaContributionRate, 2);
 
